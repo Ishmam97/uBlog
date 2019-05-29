@@ -1,0 +1,14 @@
+
+*{
+  background: #dee0da;
+  margin: 0px;
+  padding: 0px;
+}
+
+.cover{
+  height: 40vh;
+  background: #fafefd;
+  background-image: url(../res/braden-collum-1288406-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+}
