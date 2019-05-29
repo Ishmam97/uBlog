@@ -1,14 +1,201 @@
-
 *{
-  background: #dee0da;
   margin: 0px;
   padding: 0px;
+  color:   #2a002a;
 }
-
+body{
+  background: #dee0da;
+}
 .cover{
   height: 40vh;
   background: #fafefd;
   background-image: url(../res/braden-collum-1288406-unsplash.jpg);
   background-size: cover;
   background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* navbar */
+.nav{
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  background: none;
+  /* border: 4px solid black; */
+  top: 0px;
+  z-index: 5;
+  display: flex;
+  align-items: center
+}
+.home-btn{
+ box-sizing: border-box;
+ height: 50px;
+ width: 50px;
+ background: rgba(255, 255, 255, 0.2);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.fa-home{
+  color: #fff;
+  font-size: 25px;
+}
+.searchbar{
+  margin-top: 0px;
+  height: 30px;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  opacity: 0.9;
+  box-sizing: content-box;
+  padding: 8px 15px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  margin: 0px 50%;
+  transform: translate(-50%);
+
+}
+.search-text{
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0px;
+  float: left;
+  color: #097c6e;
+  font-size: 16px;
+  line-height: 30px;
+  width: 100%;
+}
+.search-btn{
+  height: 100%;
+  width:  21%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #097c6e;
+  text-decoration: none;
+  float: right;
+  border-radius: 50%;
+  transition: 0.7s;
+}
+.search-btn:hover{
+  background: #fff;
+}
+
+
+
+/* profile page */
+.page-content{
+  /* border: 4px solid black; */
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 0px 20px;
+  position: relative;
+  z-index: 3;
+  bottom: 200px;
+  background: none;
+  /* grid system */
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 1fr;
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 5px;
+
+
+}
+.box{
+  border: 2px solid black;
+  background-color: white;
+}
+
+
+/* profile card */
+#profile{
+  opacity: 1;
+  grid-row: 1/7;
+  grid-column: 1/2;
+  display: block;
+}
+#dp{
+  height: 67%;
+  box-sizing: border-box;
+  background-image: url(../res/photo-1554033842-d4f5ad6b1863.jpg);
+  background-size: cover;
+}
+#aboutme{
+  height: 33%;
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+#aboutme h2{
+
+}
+#aboutme a{
+  color: red;
+  text-decoration: none;
+}
+
+/* Stats */
+#info{
+  opacity: 1;
+  grid-row: 3/5;
+  grid-column: 2/5;
+  display: flex;
+  justify-content:space-around;
+
+}
+.stats{
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* name box */
+#name-box{
+  padding: 10px;
+  grid-row: 2/3;
+  grid-column:2/5;
+  background-color:rgba(212, 137, 164, 0.66);
+  font-family:sans-serif;
+  color:   #2a002a;
+  font-size: 15px;
+}
+#name-box h3{
+  font-size: 25px;
+  font-weight: 700px;
+}
+
+
+/* TOP POST */
+#top-post{
+  grid-row: 6/11;
+  grid-column: 2/5;
+  background: url(../res/ryan-cheng-1435665-unsplash.jpg);
+  background-size: cover;
+}
+
+#post1{
+  grid-row: 7/11;
+  grid-column: 1/2;
+  background: url(../res/launde-morel-1585231-unsplash.jpg);
+  background-size: cover;
+}
+
+
+
+.shadow1{
+  -webkit-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+  -moz-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+  box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
 }
