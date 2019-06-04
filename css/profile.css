@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter&display=swap');
+
 *{
   margin: 0px;
   padding: 0px;
-  color:   #2a002a;
 }
 body{
   background: #dee0da;
@@ -15,7 +16,12 @@ body{
   position: relative;
   z-index: 1;
 }
+img{
+max-height: 100%;
+max-width: 100%;
+object-fit: contain;
 
+}
 
 
 /* navbar */
@@ -87,12 +93,16 @@ body{
 .search-btn:hover{
   background: #fff;
 }
-
+  .page{
+    max-width: 1200px;
+    margin: 0px auto;
+  }
 
 
 /* profile page */
-.page-content{
+.content-1{
   /* border: 4px solid black; */
+
   box-sizing: border-box;
   height: 100vh;
   padding: 0px 20px;
@@ -104,13 +114,15 @@ body{
   display: grid;
   grid-template-columns: 3fr 2fr 2fr 1fr;
   grid-template-rows: repeat(10, 1fr);
-  grid-gap: 5px;
-
-
+  grid-gap: 10px;
+  font-family: 'Bitter', serif;
+  margin-bottom: 5px;
 }
+
 .box{
   border: 2px solid black;
   background-color: white;
+  min-height: 40vh;
 }
 
 
@@ -119,30 +131,64 @@ body{
   opacity: 1;
   grid-row: 1/7;
   grid-column: 1/2;
-  display: block;
+  display: flex;
+  flex-flow: column wrap;
 }
 #dp{
-  height: 67%;
-  box-sizing: border-box;
-  background-image: url(../res/photo-1554033842-d4f5ad6b1863.jpg);
-  background-size: cover;
+height: 66%;
+width: 100%;
+background: url(../res/photo-1554033842-d4f5ad6b1863.jpg);
+background-size: cover;
+background-position: center;
+display: flex;
+align-items: flex-end;
+justify-content: center;
 }
+
 #aboutme{
   height: 33%;
-  padding: 15px;
+  padding: 2%;
   box-sizing: border-box;
+
+}
+.aboutme{
+  padding: 2%;
+  background: rgba(212, 137, 164, 0.66);
+  height: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
-#aboutme h2{
-
+#aboutme p{
+ font-size: 0.95em;
 }
 #aboutme a{
   color: red;
   text-decoration: none;
 }
-
+.buttons-1{
+  margin-bottom: 2em;
+}
+.btn-1{
+  background-color: rgb(242, 130, 38);
+  border: none;
+  height: 2.5em;
+  width: 8em;
+  margin: 0 5px;
+  border-radius: 30px;
+  transition: 2s;
+}
+.btn-2{
+  background-color: rgb(242, 130, 38);
+  border: none;
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 12px;
+  transition: 2s;
+}
+.btn:hover{
+  background-color: white;
+}
 /* Stats */
 #info{
   opacity: 1;
@@ -150,7 +196,7 @@ body{
   grid-column: 2/5;
   display: flex;
   justify-content:space-around;
-
+  background-color: rgba(212, 137, 164, 0.66)
 }
 .stats{
   min-height: 100%;
@@ -159,6 +205,7 @@ body{
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
+
 }
 
 /* name box */
@@ -179,7 +226,7 @@ body{
 
 /* TOP POST */
 #top-post{
-  grid-row: 6/11;
+  grid-row: 5/10;
   grid-column: 2/5;
   background: url(../res/ryan-cheng-1435665-unsplash.jpg);
   background-size: cover;
@@ -191,11 +238,71 @@ body{
   background: url(../res/launde-morel-1585231-unsplash.jpg);
   background-size: cover;
 }
+.view-posts{
+  grid-row: 10/11;
+  width: 127%;
+  background-color: rgba(212, 137, 164, 0.66);
+  padding: 5%;
+  box-sizing: border-box;
+}
+.view-gallery{
+  grid-row: 10/11;
+  width: 127%;
+  margin-left: 25%;
+  background-color: rgba(212, 137, 164, 0.66);
+  padding: 5%;
+  box-sizing: border-box;
+}
 
+.viewContent{
+  background-color: rgb(196, 80, 64);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #000;
+  font-weight: 700;
+  transition: 2s;
+}
+.viewContent:hover {
+  color: rgba(249, 53, 53, 0.91);
+  background-color: #000;
+  font-weight: 700;
+}
 
+/* Content-2 */
+.content-2{
+  margin-top: 0px;
+  padding: 0px 20px;
+  position: relative;
+  z-index: 3;
+  bottom: 180px;
 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+.main-footer{
+  height:30vh;
+  width: 100%;
+  border: 4px solid black;
+  bottom: 0px;
+  background-color: black;
+  position: relative;
+}
 .shadow1{
   -webkit-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
   -moz-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
   box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+}
+.test{
+  position: fixed;
+  bottom: 0%;
+  z-index: 0;
+  height: 100vh;
+  width: 100%;
+  background: url(../res/lonely-planet-1124939-unsplash.png);
+  background-size: cover;
+
 }
