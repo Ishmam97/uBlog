@@ -25,8 +25,14 @@ img{
   align-items: center;
 }
 .logo{
-    margin-left: 25px;
+    height: 100px;
+    width: 100px;
+    margin-left: 40px;
     margin-right: auto;
+    background-image: url(../res/ublog.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .main-nav .logo a{
   font-size: 2.5em;
