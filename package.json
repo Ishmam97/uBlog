@@ -1,0 +1,22 @@
+{
+  "name": "ublog",
+  "version": "1.0.0",
+  "description": "social media site",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ishmam97/uBlog.git"
+  },
+  "author": "Ishmam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ishmam97/uBlog/issues"
+  },
+  "homepage": "https://github.com/Ishmam97/uBlog#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
