@@ -1,0 +1,68 @@
+*{
+  margin:0px;
+  padding: 0px;
+}
+body{
+  background: url(../../res/launde-morel-1585231-unsplash.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.container{
+  border: 2px solid black;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  width: 20rem;
+  height: 20rem;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  background: rgba(255,255,255, 0.5);
+}
+.forms{
+  display: flex;
+  flex-flow: row wrap;
+
+}
+.btn{
+  background: white;
+  width: 50%;
+  height: 2.5rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+.btn a{
+  color: #000;
+  text-decoration: none;
+}
+.fields{
+
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 10%;
+
+
+}
+.fields input{
+  height: 2em;
+  width: 60%;
+  border: none;
+
+}
+.loginBtn{
+  border: none;
+  height: 2em;
+  width: 30%;
+  background: green;
+}
+.hidden{
+  display: none;
+}

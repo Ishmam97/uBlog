@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/landing.css">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <title>uBlog-Welcome</title>
+</head>
+<body>
+  <div class="container">
+    <form action="/login" method="POST">
+      <div class="forms">
+       <div class="btn" id="login"><a href="#login">Login</a></div>
+       <div class="btn" id="register"><a href="#register">Sign Up</a></div>
+      </div>
+      <div class="fields" id="loginForm">
+
+          <input type="text" name="email" placeholder="Enter Email">
+          <br>
+          <input type="password" name="pass" placeholder="Enter Password">
+          <br>
+          <button class="loginBtn"  name="loginBtn" type="submit" >Login</button>
+
+      </div>
+      <div class="fields hidden" id="registerForm">
+
+          <input type="text" name="email" placeholder="Enter Email">
+          <br>
+          <input type="password" name="pass" placeholder="Enter Password">
+          <br>
+          <input type="password2" name="pass2" placeholder="Enter Password">
+          <br>
+          <button class="loginBtn"  name="loginBtn" type="submit" >Login</button>
+
+      </div>
+
+    </form>
+  </div>
+  <script src="scripts/login.js" charset="utf-8"></script>
+</body>
+</html>
