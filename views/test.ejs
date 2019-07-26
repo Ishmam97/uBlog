@@ -1,0 +1,50 @@
+<%- include("partials/header") -%>
+<style media="screen">
+   html{
+     background: url("res/bg.png");
+     background-size: cover;
+   }
+  .container{
+    border: 2px solid teal;
+    padding: 5px;
+    height: 24em;
+    width: 20em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.8);
+  }
+  .logo{
+    padding: 0px;
+    height: 6em;
+    width: 6em;
+    margin: 0px auto;
+    transform: translateY(-20%);
+  }
+  .logo img{
+    max-width:100%;
+    height: auto;
+  }
+</style>
+
+<div class="container p-3 pt-0">
+  <div class="logo mb-2">
+    <img src="res/logo.png" alt="logo" class="img-fluid">
+  </div>
+  <form class="d-flex flex-column justify-content-center" method="post" action="/login">
+    <div class="form-group d-block">
+      <label for="emailInput">Email</label>
+      <input type="text" class="form-control" id="emailInput" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group mb-4">
+      <label for="pwd">Password</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter Password" name="pass">
+    </div>
+    <button class="btn btn-outline-dark btn-block mb-3" type="submit" name="login">Login</button>
+    <a href="/register">Not a member? Register here!</a>
+  </form>
+</div>
+
+
+<%- include("partials/footer") -%>

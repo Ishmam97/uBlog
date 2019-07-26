@@ -1,26 +1,28 @@
-// jshint esversion:6
-const express = require('express');
+//jshint esversion:6
+
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const bodyParser = require('body-parser');
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-app.use(express.static(__dirname + '/public'));
+const indexRouter = require('./routes/index');
 
-//route handling
-app.get('/', function (req, res) {
-  //send landing page;
-  res.sendFile(__dirname+"/landing.html");
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static('public'));
+
+app.use('/', indexRouter); //index.js for all routes
+
+
+
+
+
+
+app.listen(3000, function(){
+  console.log("Server started on port 3000.");
 });
-app.post('/login', (req, res)=>{
-  res.send('hello');
-})
-app.get('/home',(req, res)=>{
-  res.sendFile(__dirname+"/homepage.html");
-})
-app.get('/profile',(req,res)=>{
-  res.sendFile(__dirname+"/profile.html");
-})
-// starting server
-
-app.listen(3000, ()=>{
-  console.log("server started on port 3000");
-});
+module.exports = app;

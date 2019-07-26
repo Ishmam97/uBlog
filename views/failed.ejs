@@ -1,0 +1,40 @@
+<%- include("partials/header") -%>
+<style media="screen">
+  html{
+    background: url("res/bg.png");
+    background-size: cover;
+  }
+  .card-body{
+    position:absolute;
+    z-index: 3;
+    background-color: rgba(255,255,255,0.8);
+    border: 2px solid teal;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width:400px;
+  }
+</style>
+
+<div class="card h-25 w-25 ">
+  <div class="card-body d-flex flex-column justify-content center align-items-center">
+   <% if (title === "Login failed"){ %>
+    <h4 class="card-title"><i class="fas fa-cannabis"></i></h4>
+    <h6 class="card-subtitle mb-2 text-muted">Login failed</h6>
+
+    <p class="card-text">
+      Username or password incorrect, please try again
+    </p>
+    <a href="/" class="card-link">try again?</a>
+   <%} else{ %>
+     <h4 class="card-title"><i class="fas fa-cannabis"></i></h4>
+     <h6 class="card-subtitle mb-2 text-muted">Logged Out</h6>
+
+     <p class="card-text">
+       You have been logged out successfully
+     </p>
+     <a href="/" class="card-link">Log back in?</a>
+    <% } %>
+  </div>
+
+</div><%- include("partials/footer") -%>
