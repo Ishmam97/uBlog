@@ -18,14 +18,22 @@
 
 <div class="card h-25 w-25 ">
   <div class="card-body d-flex flex-column justify-content center align-items-center">
-   <% if (title === "Login failed"){ %>
+    <% if (title === "Login failed"){ %>
+     <h4 class="card-title"><i class="fas fa-cannabis"></i></h4>
+     <h6 class="card-subtitle mb-2 text-muted">Login failed</h6>
+
+     <p class="card-text">
+       Username or password incorrect, please try again
+     </p>
+     <a href="/" class="card-link">try again?</a>
+  <%} else if (title === "pass missmatch"){ %>
     <h4 class="card-title"><i class="fas fa-cannabis"></i></h4>
-    <h6 class="card-subtitle mb-2 text-muted">Login failed</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Password Missmatch</h6>
 
     <p class="card-text">
-      Username or password incorrect, please try again
+      Passwords Dont match, please try again
     </p>
-    <a href="/" class="card-link">try again?</a>
+    <a href="/register" class="card-link">try again?</a>
    <%} else{ %>
      <h4 class="card-title"><i class="fas fa-cannabis"></i></h4>
      <h6 class="card-subtitle mb-2 text-muted">Logged Out</h6>
