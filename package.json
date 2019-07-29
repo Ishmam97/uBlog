@@ -1,28 +1,26 @@
 {
-  "name": "ublog",
+  "name": "ejs-tutoria",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ishmam97/uBlog.git"
-  },
-  "author": "Ishmam",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Ishmam97/uBlog/issues"
-  },
-  "homepage": "https://github.com/Ishmam97/uBlog#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "debug": "~2.6.9",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "express-session": "^1.16.2",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
