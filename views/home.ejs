@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%=title%></title>
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/662628882d.js"></script>
+
+</head>
+
+<body>
+<!-- NAVbAR -->
+  <div class="main-nav">
+  <div class="logo"></div>
+  <div class="searchbar">
+  <input type="text" class="search-text" placeholder="Search">
+  <a href="#" class="search-btn">
+  <i class="fas fa-search"></i>
+  </a>
+  </div>
+  <div class="nav-list">
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/messages">Messages</a></li>
+      <li><a href="/logut">Logout</a></li>
+    </ul>
+  </div>
+  </div>
+
+<!-- posts loaded dynamically -->
+<div class="page">
+ <% for(let i = 1; i<=posts ;i++){ %>
+   <div class="box b<%= (i < 8)? i : (i%8)+1 %> ">
+
+   </div>
+<% } %>
+</div>
+<%for(let i = 0; i<=6; i++){%>
+  <br>
+<%}%>
+<!-- after feed -->
+<div class="box"></div>
+</body>
+</html>

@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
   host  : 'localhost',
   user  : 'root',
   password : 'root',
-  database  : 'test'
+  database  : 'ublog'
 });
 
 const app = express();
@@ -33,7 +33,6 @@ app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true,
-  cookie: { secure: true }
 }));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -54,9 +53,10 @@ app.post("/login",(req, res)=>{
 			if (results.length > 0) {
 				req.session.loggedin = true;
 				req.session.username = email;
-        //take to homepage iff success
+        req.session.save();
         console.log(req.session);
-				res.send('<h1>login success</h1>');
+        //take to homepage iff success
+				res.redirect('/home');
 			} else {
 				res.render(`failed`, {title: `Login failed`});
 			}
@@ -69,14 +69,6 @@ app.post("/login",(req, res)=>{
 	}
 });
 
-app.get('/home', function(request, response) {
-  if (request.session.loggedin) {
-    response.send('Welcome back, ' + request.session.username + '!');
-  } else {
-    response.send('Please login to view this page!');
-  }
-  response.end();
-});
 
 app.get("/register", (req, res)=>{
    res.render("register",{title:`UBlog - Register`});
@@ -85,11 +77,11 @@ app.get("/register", (req, res)=>{
 app.post('/register' , (req, res) =>{
   // retreive values from webpage
 let reg={
-   fname :  req.body.fname,
-   lname : req.body.lname,
+   name :  `${req.body.fname} ${req.body.lname}`,
    dob : req.body.dob,
    email : req.body.email,
-   password : req.body.pass
+   password : req.body.pass,
+   user_type: 0
  };
   if(reg.password !== req.body.pass2){
     res.render('failed', {title: `pass missmatch`});
@@ -116,10 +108,25 @@ let reg={
 });
 
 app.get("/testpage",(rq,rs)=>{
-  rs.render("test");
+  rs.render("test",{title: "testpage"});
 });
 
 
+app.get("/home", function(req, res) {
+
+
+ let posts = 14;
+
+  if (req.session.loggedin) {
+    res.render("home",{
+      title:"uBlog | Home",
+      posts: posts
+  });
+  } else {
+    res.send("not logged in");
+  }
+  res.end();
+});
 
 
 
