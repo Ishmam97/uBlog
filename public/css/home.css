@@ -1,4 +1,6 @@
-
+html{
+  padding: 0px;
+}
 body{
   margin: 0px;
   padding: 0px;
@@ -82,6 +84,10 @@ img{
 
 .nav-list{
   margin-left: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 ul{
  display: flex;
@@ -109,6 +115,7 @@ li a{
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4,1fr);
   transform: translateY(2%);
+  margin-bottom: 70px;
 }
 .box{
   min-height: 20em;
@@ -147,4 +154,10 @@ li a{
 .b7{
  background: #777;
  grid-column: span 3;
+}
+.foot{
+  margin: 0px;
+  height: 15em;
+  background-color: #097c6e;
+  width: 100%;
 }

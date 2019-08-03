@@ -120,7 +120,8 @@ app.get("/home", function(req, res) {
   if (req.session.loggedin) {
     res.render("home",{
       title:"uBlog | Home",
-      posts: posts
+      posts: posts,
+      post: "res/bg.png"
   });
   } else {
     res.send("not logged in");
