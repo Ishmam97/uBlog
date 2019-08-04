@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter&display=swap');
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+  background: #dee0da;
+}
+.cover{
+  height: 40vh;
+  background: #fafefd;
+  /* background-image: url(../res/braden-collum-1288406-unsplash.jpg); */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+img{
+max-height: 100%;
+max-width: 100%;
+object-fit: contain;
+
+}
+
+
+/* navbar */
+.nav{
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  background: none;
+  /* border: 4px solid black; */
+  top: 0px;
+  z-index: 5;
+  display: flex;
+  align-items: center
+}
+.home-btn{
+ box-sizing: border-box;
+ height: 50px;
+ width: 50px;
+ background: rgba(255, 255, 255, 0.2);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.fa-home{
+  color: #fff;
+  font-size: 25px;
+}
+.searchbar{
+  margin-top: 0px;
+  height: 30px;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  opacity: 0.9;
+  box-sizing: content-box;
+  padding: 8px 15px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  margin: 0px 50%;
+  transform: translate(-50%);
+
+}
+.search-text{
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0px;
+  float: left;
+  color: #097c6e;
+  font-size: 16px;
+  line-height: 30px;
+  width: 100%;
+}
+.search-btn{
+  height: 100%;
+  width:  21%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #097c6e;
+  text-decoration: none;
+  float: right;
+  border-radius: 50%;
+  transition: 0.7s;
+}
+.search-btn:hover{
+  background: #dfdfdf;
+}
+  .page{
+    max-width: 1200px;
+    margin: 0px auto;
+  }
+.page-wrapper{
+  max-width: 820px;
+  margin: 0px auto;
+}
+/* profile page */
+.content-1{
+  /* border: 4px solid black; */
+
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 0px 20px;
+  position: relative;
+  z-index: 3;
+  bottom: 200px;
+  background: none;
+  /* grid system */
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 1fr;
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 10px;
+  font-family: 'Bitter', serif;
+  margin-bottom: 5px;
+}
+
+.box{
+
+  background-color: white;
+  min-height: 40vh;
+}
+
+
+/* profile card */
+#profile{
+  opacity: 1;
+  grid-row: 1/7;
+  grid-column: 1/2;
+  display: flex;
+  flex-flow: column wrap;
+}
+#dp{
+height: 66%;
+width: 100%;
+/* background: url(../res/photo-1554033842-d4f5ad6b1863.jpg); */
+background-size: cover;
+background-position: center;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+#aboutme{
+  height: 33%;
+  padding: 2%;
+  box-sizing: border-box;
+
+}
+.aboutme{
+  padding: 2%;
+  background: rgba(212, 137, 164, 0.66);
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+#aboutme p{
+ font-size: 0.95em;
+}
+#aboutme a{
+  color: red;
+  text-decoration: none;
+}
+.buttons-1{
+  margin-bottom: 2em;
+}
+.btn-1{
+  background-color: rgb(242, 130, 38);
+  border: none;
+  height: 2.5em;
+  width: 8em;
+  margin: 0 5px;
+  border-radius: 30px;
+  transition: 2s;
+}
+.btn-2{
+  background-color: rgb(242, 130, 38);
+  border: none;
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 12px;
+  transition: 2s;
+}
+.btn:hover{
+  background-color: white;
+}
+/* Stats */
+#info{
+  opacity: 1;
+  grid-row: 3/5;
+  grid-column: 2/5;
+  display: flex;
+  justify-content:space-around;
+  background-color: rgba(212, 137, 164, 0.66)
+}
+.stats{
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* name box */
+#name-box{
+  padding: 10px;
+  grid-row: 2/3;
+  grid-column:2/5;
+  background-color:rgba(212, 137, 164, 0.66);
+  font-family:sans-serif;
+  color:   #2a002a;
+  font-size: 15px;
+}
+#name-box h3{
+  font-size: 25px;
+  font-weight: 700px;
+}
+
+
+/* TOP POST */
+#top-post{
+  grid-row: 5/10;
+  grid-column: 2/5;
+  /* background: url(../res/ryan-cheng-1435665-unsplash.jpg); */
+  background-size: cover;
+}
+
+#post1{
+  grid-row: 7/11;
+  grid-column: 1/2;
+  /* background: url(../res/launde-morel-1585231-unsplash.jpg); */
+  background-size: cover;
+}
+.view-posts{
+  grid-row: 10/11;
+  width: 127%;
+  background-color: rgba(212, 137, 164, 0.66);
+  padding: 5%;
+  box-sizing: border-box;
+}
+.view-gallery{
+  grid-row: 10/11;
+  width: 127%;
+  margin-left: 25%;
+  background-color: rgba(212, 137, 164, 0.66);
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.viewContent{
+  background-color: rgb(196, 80, 64);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #000;
+  font-weight: 700;
+  transition: 2s;
+}
+.viewContent:hover {
+  color: rgba(249, 53, 53, 0.91);
+  background-color: #000;
+  font-weight: 700;
+}
+
+/* Content-2 */
+.content-2{
+  margin-top: 0px;
+  padding: 0px 20px;
+  position: relative;
+  z-index: 3;
+  bottom: 180px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+.main-footer{
+  height:30vh;
+  width: 100%;
+  border: 4px solid black;
+  bottom: 0px;
+  background-color: black;
+  position: relative;
+}
+.shadow1{
+  -webkit-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+  -moz-box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+  box-shadow: 0px 7px 15px -1px rgba(0,0,0,0.53);
+}
+.bp{
+  position: fixed;
+  bottom: 0%;
+  z-index: 0;
+  height: 100vh;
+  width: 100%;
+
+  background-size: cover;
+
+}

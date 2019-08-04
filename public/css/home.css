@@ -182,3 +182,37 @@ li a{
   border-radius: 50%;
   font-size: 2em;
 }
+.selected-post{
+
+  background-color: red;
+  position: fixed;
+  z-index: 3;
+  height: 80vh;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0px auto;
+
+}
+.overlay{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.5;
+}
+#x{
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  background: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.hidden{
+  display: none;
+}
