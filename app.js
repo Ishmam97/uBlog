@@ -8,7 +8,7 @@ const createError = require('http-errors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const multer = require('multer');
 // const indexRouter = require('./routes/index');
 
 const mysql = require('mysql');
@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
   host  : 'localhost',
   user  : 'root',
   password : 'root',
-  database  : 'ublog'
+  database  : 'ublogmain'
 });
 
 const app = express();
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
 app.use(logger('dev'));
 
-// app.use('/', indexRouter); //index.js for all routes
+// app.use('/', indexRouter); //index.js for all routes future update
 
 app.use(session({
 	secret: 'secret',
@@ -37,6 +37,20 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
+
+//set image storage engine
+const storage = multer.diskStorage({
+  destination:'./public/res/',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+// initupload
+const upload = multer({
+  storage: storage
+}).single('photo1');
+
+var userID = "";
 
 
 /* GET home page. */
@@ -56,6 +70,12 @@ app.post("/login",(req, res)=>{
         req.session.save();
         console.log(req.session);
         //take to homepage iff success
+    connection.query('SELECT user_id FROM user WHERE email = ?',[req.session.username],(err, result , fields)=>{
+          if(err) console.log(err);
+          else{
+             userID = result[0].user_id;
+          }
+        });
 				res.redirect('/home');
 			} else {
 				res.render(`failed`, {title: `Login failed`});
@@ -114,19 +134,86 @@ app.get("/testpage",(rq,rs)=>{
 
 app.get("/home", function(req, res) {
 
+let numPosts = 0;
 
- let posts = 14;
+var pics = [];
+connection.query('select count(*) as postcount from posts',(err , result, fields)=>{
+  if(err) throw err;
+  else{
+    numPosts =  result[0].postcount;
+    console.log(result[0].postcount);
+    connection.query('select picture from post_picture', (err, result, fields)=>{
+       if(err) throw err;
+       else{
+        pictures = result;
 
-  if (req.session.loggedin) {
-    res.render("home",{
-      title:"uBlog | Home",
-      posts: posts,
-      post: "res/bg.png"
-  });
-  } else {
-    res.send("not logged in");
+        for(var i in pictures){
+           pics.push([pictures[i].picture]);
+          }
+
+        }
+       if (req.session.loggedin) {
+         res.render("home",{
+           title:"uBlog | Home",
+           posts: numPosts,
+           pics: pics
+         });
+       } else {
+         res.send("not logged in");
+       }
+    });
+
   }
-  res.end();
+});
+
+});
+
+app.get("/newpost",(rq,rs)=>{
+  rs.render("post",{title:"Make new post"});
+});
+
+var postID = "";
+app.post('/makepost',(req , res)=>{
+let caption = "";
+let desc = "";
+  upload(req, res, (err)=>{
+     if(err) console.log(err);
+     else {
+       caption = req.body.caption;
+       desc = req.body.desc;
+       // console.log(req.file);
+       let dir = req.file.path;
+       // console.log(dir);
+       let insertpost = 'insert into posts SET ?';
+       let makepost = 'insert into make_posts SET ?';
+       let postpic = 'insert into post_picture SET ?';
+   connection.query(insertpost, {caption : req.body.caption ,body: req.body.desc, user_id:userID}, (err)=>{
+         if (err) throw err;
+          console.log("inserted caption and desc");
+        connection.query('SELECT id FROM posts WHERE caption = ?',[caption],(err, result, fields)=>{
+           if(err) console.log("error inpostid");
+           else{
+                 postID = result[0].id;
+                 console.log(`post id is ${postID}`);
+                    connection.query(makepost , {user_id:userID, post_id : postID}, (err)=>{
+                        if (err) throw err;
+                        else{
+                            connection.query(postpic ,{post_id: postID, picture:`res/${req.file.filename}`},(err)=>{
+                              if (err) throw err;
+                              else{
+                                console.log("image stored");
+                              }
+                            });
+                      }
+                      });
+            }
+           });
+        });
+
+
+     res.render("post", {title:"Succesfully posted"});
+  }
+});
 });
 
 

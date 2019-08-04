@@ -161,3 +161,24 @@ li a{
   background-color: #097c6e;
   width: 100%;
 }
+.newpost{
+
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 20px;
+}
+
+
+.postbutton{
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: teal;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  font-size: 2em;
+}
