@@ -1,4 +1,4 @@
-//jshint esversion:6
+//jshint esversion:8
 
 const express = require("express");
 // const router = express.Router();
@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const multer = require('multer');
 // const indexRouter = require('./routes/index');
-
+const util = require('util');
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -216,11 +216,63 @@ let desc = "";
 });
 });
 
+var userInfo={
+  name: "",
+  posts:"",
+  dp: "",
+  cp: "",
+  friends:""  ,
+  followers: "",
+  bp:"",
+  numposts : ""
+};
+function loadUserInfo() {
+return new Promise((resolve , reject)=>{
+  connection.query('select * from user where user_id = ?',[userID],(err, result, fields)=>{
+    if(err) reject(err);
+    userInfo.name = result[0].name;
+    userInfo.dp = result[0].dp;
+    userInfo.cp = result[0].cp;
+    userInfo.bp = result[0].bp;
+  });
+  connection.query('select count(*) as friends from friends where user_id = ? group by user_id', [userID],(err , result, fields)=>{
+    if (err) reject(err);
+    else{
+      userInfo.friends = result[0].friends;
+    }
+  });
+  connection.query('select count(*) as subs from follow where user_id = ?', [userID],(err , result, fields)=>{
+    if (err) reject(err);
+    else{
+      userInfo.followers = result[0].subs;
+    }
+  });
+  connection.query('select count(*) as numPosts from posts where user_id = ?', [userID], (err , result , fields)=>{
+    if (err) reject(err);
+    userInfo.numposts = result[0].numPosts;
+    console.log('numposts  set to :');
+    console.log(userInfo.numposts);
+  });
+  connection.query('select * from posts where user_id=?',[userID],(err, result, fields)=>{
+    if (err) reject(err);
+    console.log('retreiving posts for: ');
+    console.log('userInfo');
+    console.log(userInfo);
+    resolve(userInfo);
+  });
+});
+}
 
 
 app.get("/profile" ,(req , res)=>{
-    res.render('profile',{title:"Profile"});
-
+ loadUserInfo().then((userInfo)=>{
+  console.log("in .then statement")  ;
+  console.log(userInfo);
+  res.render("profile", {title:"profile | uBlog" ,name:userInfo.name, numposts:userInfo.numposts,followers:userInfo.followers,friends:userInfo.friends});
+}).catch((err)=>{
+  console.log(err);
+  res.send("failed to load profile");
+});
 });
 
 
