@@ -218,7 +218,7 @@ let desc = "";
 
 var userInfo={
   name: "",
-  posts:"",
+  posts:[],
   dp: "",
   cp: "",
   friends:""  ,
@@ -235,7 +235,7 @@ return new Promise((resolve , reject)=>{
     userInfo.cp = result[0].cp;
     userInfo.bp = result[0].bp;
   });
-  connection.query('select count(*) as friends from friends where user_id = ? group by user_id', [userID],(err , result, fields)=>{
+  connection.query('select count(*) as friends from friends where user_id = ?', [userID],(err , result, fields)=>{
     if (err) reject(err);
     else{
       userInfo.friends = result[0].friends;
@@ -253,11 +253,14 @@ return new Promise((resolve , reject)=>{
     console.log('numposts  set to :');
     console.log(userInfo.numposts);
   });
-  connection.query('select * from posts where user_id=?',[userID],(err, result, fields)=>{
+  connection.query('select posts.id, posts.caption, posts.body, posts.time, post_picture.picture from posts inner join post_picture on posts.id = post_picture.post_id where posts.user_id = ?',[userID],(err, result, fields)=>{
     if (err) reject(err);
-    console.log('retreiving posts for: ');
-    console.log('userInfo');
-    console.log(userInfo);
+    console.log(result);
+    // for (let  i = 0 ; i < userInfo.numposts; ++i){
+    //   userInfo.posts.push(result[i]);
+    // }
+userInfo.posts = result;
+
     resolve(userInfo);
   });
 });
@@ -268,7 +271,7 @@ app.get("/profile" ,(req , res)=>{
  loadUserInfo().then((userInfo)=>{
   console.log("in .then statement")  ;
   console.log(userInfo);
-  res.render("profile", {title:"profile | uBlog" ,name:userInfo.name, numposts:userInfo.numposts,followers:userInfo.followers,friends:userInfo.friends});
+  res.render("profile", {title:"profile | uBlog" ,name:userInfo.name, numposts:userInfo.numposts,followers:userInfo.followers,friends:userInfo.friends, posts:userInfo.posts, dp: userInfo.dp,  bp: userInfo.bp,  cp: userInfo.cp});
 }).catch((err)=>{
   console.log(err);
   res.send("failed to load profile");

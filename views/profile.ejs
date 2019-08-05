@@ -23,7 +23,7 @@
 
 </div>
 <div class="nav">
-  <div class="home-btn"><a href="#"><i class="fas fa-home "></i></a></div>
+  <div class="home-btn"><a href="/home"><i class="fas fa-home "></i></a></div>
   <div class="searchbar">
   <input type="text" class="search-text" placeholder="Search">
   <a href="#" class="search-btn">
@@ -37,15 +37,12 @@
 </div>
 
 
-<div class="page-wrapper">
+
    <div class="page content-1">
    <!-- all content goes here -->
     <div class="shadow1" id="profile">
       <div id="dp">
-        <div class="buttons-1">
-              <a href="#"><button class="btn btn-1">Subscribe</button></a>
-              <a href="#"><button class="btn btn-2">+</button></a>
-        </div>
+          
       </div>
       <div id="aboutme">
         <div class="aboutme">
@@ -81,7 +78,10 @@
       <footer><em>Food, Travel, Music</em></footer>
 
     </div>
-    <div class="shadow1" id="top-post">
+    <div class="box shadow1" id="top-post">
+      <h4><%=posts[0].caption%></h4>
+      <p><%=posts[0].body%></p>
+      <img src="<%=posts[0].picture%>" alt="pic1" height="100%" width="100%">
 
     </div>
 
@@ -89,17 +89,16 @@
    </div>
    <!-- load other posts -->
 <div class="page content-2">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-   <div class="box"></div>
-    <div class="box"></div>
-  <div class="box"></div>
+ <% for(let i = 1; i<numposts ;i++){ %>
+  <div class="box shadow1">
+    <h4><%=posts[i].caption%></h4>
+    <p><%=posts[i].body%></p>
+    <img src="<%=posts[i].picture%>" alt="pic1" height="100%" width="100%">
+  </div>
+<% } %>
 </div>
 
-</div>
+
  <!-- footer -->
  <div class="main-footer">
 
@@ -107,7 +106,14 @@
 
    <!-- scripts -->
    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+   <script>
+       $(document).ready(function(){
+            $('.cover').css({"background":"url(<%=cp%>)","background-size":"cover", "background-position" : "center"});
+            $('#dp').css({"background":"url(<%=dp%>)","background-size":"cover", "background-position" : "center"});
+            $('.bp').css({"background":"url(<%=bp%>)","background-size":"cover", "background-position" : "center"});
+       });
 
+   </script>
 
 
 

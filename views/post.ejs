@@ -14,8 +14,26 @@
 
 </head>
 <body>
+  <div class="main-nav">
+  <a href="/home"><div class="logo"></div></a>
+  <div class="searchbar">
+  <input type="text" class="search-text" placeholder="Search">
+  <a href="#" class="search-btn">
+  <i class="fas fa-search"></i>
+  </a>
+  </div>
+  <div class="nav-list">
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/messages">Messages</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  </div>
+
 
 <div class="container p-3 pt-0">
+  <h3>Make a new post</h3>
 <form action="makepost" method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center">
   <div class="form-group d-block">
     <label for="caption">Caption</label>
