@@ -171,8 +171,18 @@ justify-content: center;
   color: red;
   text-decoration: none;
 }
-.buttons-1{
-  margin-bottom: 2em;
+.buttons{
+  background: none;
+
+  position: absolute;
+  box-sizing:content-box;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  width: 104.5px;
+  top: 20vh;
 }
 .btn-1{
   background-color: rgb(242, 130, 38);

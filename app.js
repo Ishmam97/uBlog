@@ -169,51 +169,62 @@ connection.query('select count(*) as postcount from posts',(err , result, fields
 });
 
 app.get("/newpost",(rq,rs)=>{
-  rs.render("post",{title:"Make new post"});
+  rs.render("post",{title:"Make a new post",postRoute:"makepost"});
 });
 
 var postID = "";
+var postPicPath = "";
+function uploadP(req , res) {
+  return new Promise((resolve , reject)=>{
+    let caption = "";
+    let desc = "";
+      upload(req, res, (err)=>{
+         if(err) console.log(err);
+         else {
+           caption = req.body.caption;
+           desc = req.body.desc;
+           // console.log(req.file);
+           let dir = req.file.path;
+           // console.log(dir);
+           postPicPath = `res/${req.file.filename}`;
+           let insertpost = 'insert into posts SET ?';
+           let makepost = 'insert into make_posts SET ?';
+           let postpic = 'insert into post_picture SET ?';
+       connection.query(insertpost, {caption : req.body.caption ,body: req.body.desc, user_id:userID}, (err)=>{
+             if (err) console.log("caption error");
+              console.log("inserted caption and desc");
+            connection.query('SELECT id FROM posts WHERE caption = ?',[caption],(err, result, fields)=>{
+               if(err) console.log("error inpostid");
+               else{
+                     postID = result[0].id;
+                     console.log(`post id is ${postID}`);
+                        connection.query(makepost , {user_id:userID, post_id : postID}, (err)=>{
+                            if (err) console.log(`error in makepost`);
+                            else{
+                                connection.query(postpic ,{post_id: postID, picture:`res/${req.file.filename}`},(err)=>{
+                                  if (err) console.log("error in storing patj") ;
+                                  else{
+                                    console.log("path of post is")
+                                    console.log(postPicPath);
+                                    resolve("image stored");
+                                  }
+                                });
+                          }
+                          });
+                }
+               });
+            });
+
+
+      }
+    });
+  });
+}
+
+
 app.post('/makepost',(req , res)=>{
-let caption = "";
-let desc = "";
-  upload(req, res, (err)=>{
-     if(err) console.log(err);
-     else {
-       caption = req.body.caption;
-       desc = req.body.desc;
-       // console.log(req.file);
-       let dir = req.file.path;
-       // console.log(dir);
-       let insertpost = 'insert into posts SET ?';
-       let makepost = 'insert into make_posts SET ?';
-       let postpic = 'insert into post_picture SET ?';
-   connection.query(insertpost, {caption : req.body.caption ,body: req.body.desc, user_id:userID}, (err)=>{
-         if (err) throw err;
-          console.log("inserted caption and desc");
-        connection.query('SELECT id FROM posts WHERE caption = ?',[caption],(err, result, fields)=>{
-           if(err) console.log("error inpostid");
-           else{
-                 postID = result[0].id;
-                 console.log(`post id is ${postID}`);
-                    connection.query(makepost , {user_id:userID, post_id : postID}, (err)=>{
-                        if (err) throw err;
-                        else{
-                            connection.query(postpic ,{post_id: postID, picture:`res/${req.file.filename}`},(err)=>{
-                              if (err) throw err;
-                              else{
-                                console.log("image stored");
-                              }
-                            });
-                      }
-                      });
-            }
-           });
-        });
+uploadP(req , res).then(res.render("post", {title:"Succesfully posted"})).catch(console.log("error"));
 
-
-     res.render("post", {title:"Succesfully posted"});
-  }
-});
 });
 
 var userInfo={
@@ -277,6 +288,57 @@ app.get("/profile" ,(req , res)=>{
   res.send("failed to load profile");
 });
 });
+
+
+app.get("/changeDP",(req , res ) => {
+  res.render("post",{title:"Change dp",postRoute:"changedDP"});
+});
+app.post("/changedDP",(req , res)=>{
+
+    uploadP(req , res).then(()=>{
+       console.log(`picture path for dp is ${postPicPath}`);
+       connection.query(`update user set dp = ? where user_id = ?`,[postPicPath, userID],(err)=>{
+         if(err) console.log(err);
+         else{
+           console.log('changed dp succesfully');
+         }
+       });
+
+    }).then(res.redirect("/profile"));
+});
+
+app.get("/changeBP",(req , res ) => {
+  res.render("post",{title:"Change dp",postRoute:"changedBP"});
+});
+app.post("/changedBP",(req , res)=>{
+
+  uploadP(req , res).then(()=>{
+     console.log(`picture path for bp is ${postPicPath}`);
+     connection.query(`update user set bp = ? where user_id = ?`,[postPicPath, userID],(err)=>{
+       if(err) console.log(err);
+       else{
+         console.log('changed bp succesfully');
+       }
+     });
+
+  }).then(res.redirect("/profile"));
+});
+app.get("/changeCP",(req , res ) => {
+  res.render("post",{title:"Change cp",postRoute:"changedCP"});
+});
+app.post("/changedCP",(req , res)=>{
+    uploadP(req , res).then(()=>{
+       console.log(`picture path for cp is ${postPicPath}`);
+       connection.query(`update user set cp = ? where user_id = ?`,[postPicPath, userID],(err)=>{
+         if(err) console.log(err);
+         else{
+           console.log('changed cp succesfully');
+         }
+       });
+
+    }).then(res.redirect("/profile"));
+});
+
 
 
 

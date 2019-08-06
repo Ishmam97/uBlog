@@ -33,8 +33,9 @@
 
 
 <div class="container p-3 pt-0">
-  <h3>Make a new post</h3>
-<form action="makepost" method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center">
+  <h3><%=title%></h3>
+<form action="<%=postRoute%>" method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center">
+
   <div class="form-group d-block">
     <label for="caption">Caption</label>
     <input type="text" id="caption" name="caption">
