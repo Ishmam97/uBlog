@@ -204,7 +204,7 @@ function uploadP(req , res) {
                                 connection.query(postpic ,{post_id: postID, picture:`res/${req.file.filename}`},(err)=>{
                                   if (err) console.log("error in storing patj") ;
                                   else{
-                                    console.log("path of post is")
+                                    console.log("path of post is");
                                     console.log(postPicPath);
                                     resolve("image stored");
                                   }
@@ -339,7 +339,33 @@ app.post("/changedCP",(req , res)=>{
     }).then(res.redirect("/profile"));
 });
 
+// app.get(`/followers` , (req , res)=>{
+//   res.send("test");
+// });
 
+// app.get(`/friends` , (req , res)=>{
+//   loadFriends(req, res).then(
+//     res.render("friends", {title: `friendlist`})
+//   );
+// });
+//
+// var users = {};
+// function loadSearch(req, res){
+//   return new Promise((resolve , reject) => {
+//     connection.query('select * from user where user_id != ?',[userID], (err, result , fields)=>{
+//
+//               users = result;
+//               console.log('in function');
+//               console.log(users);
+//               resolve(users);
+//     } );
+//
+//   });
+// }
+// app.get('/search', (req , res)=>{
+//    loadSearch(req , res).then(res.send(users[0].name));
+//
+// });
 
 
 app.get("/logout",(rq,rs)=>{
