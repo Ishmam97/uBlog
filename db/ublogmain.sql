@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ublogmain` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ublogmain`;
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ublogmain
@@ -56,9 +54,9 @@ DROP TABLE IF EXISTS `follow`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `follow` (
   `user_id` int(11) NOT NULL,
-  `follower_id` int(11) DEFAULT NULL,
+  `follower_id` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`user_id`,`follower_id`),
   KEY `follower_id` (`follower_id`),
   CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`follower_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -70,7 +68,7 @@ CREATE TABLE `follow` (
 
 LOCK TABLES `follow` WRITE;
 /*!40000 ALTER TABLE `follow` DISABLE KEYS */;
-INSERT INTO `follow` VALUES (2,1,'2019-07-31 03:21:34');
+INSERT INTO `follow` VALUES (1,2,'2019-08-05 20:12:34'),(1,4,'2019-08-05 20:14:33'),(2,1,'2019-07-31 03:21:34');
 /*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +123,7 @@ CREATE TABLE `friends` (
 
 LOCK TABLES `friends` WRITE;
 /*!40000 ALTER TABLE `friends` DISABLE KEYS */;
-INSERT INTO `friends` VALUES (1,5);
+INSERT INTO `friends` VALUES (1,3),(1,5);
 /*!40000 ALTER TABLE `friends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,7 +207,7 @@ CREATE TABLE `make_posts` (
 
 LOCK TABLES `make_posts` WRITE;
 /*!40000 ALTER TABLE `make_posts` DISABLE KEYS */;
-INSERT INTO `make_posts` VALUES (1,19,'2019-08-04 03:46:37'),(1,23,'2019-08-04 04:15:52'),(1,24,'2019-08-04 05:12:02'),(3,21,'2019-08-04 03:57:04'),(4,22,'2019-08-04 03:57:54');
+INSERT INTO `make_posts` VALUES (1,19,'2019-08-04 03:46:37'),(1,23,'2019-08-04 04:15:52'),(1,24,'2019-08-04 05:12:02'),(1,25,'2019-08-05 20:07:52'),(1,35,'2019-08-06 00:07:18'),(1,36,'2019-08-06 00:07:45'),(3,21,'2019-08-04 03:57:04'),(3,26,'2019-08-05 21:03:59'),(3,28,'2019-08-05 22:57:49'),(4,22,'2019-08-04 03:57:54'),(4,27,'2019-08-05 22:42:04'),(4,34,'2019-08-06 00:01:55');
 /*!40000 ALTER TABLE `make_posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +283,7 @@ CREATE TABLE `post_picture` (
   PRIMARY KEY (`p_id`,`post_id`),
   KEY `post_id` (`post_id`),
   CONSTRAINT `post_picture_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +292,7 @@ CREATE TABLE `post_picture` (
 
 LOCK TABLES `post_picture` WRITE;
 /*!40000 ALTER TABLE `post_picture` DISABLE KEYS */;
-INSERT INTO `post_picture` VALUES (3,19,'res/photo1-1564890397308.jpg'),(4,21,'res/photo1-1564891023953.jpg'),(5,22,'res/photo1-1564891074915.jpg'),(6,23,'res/photo1-1564892152734.jpg'),(7,24,'res/photo1-1564895522649.jpg');
+INSERT INTO `post_picture` VALUES (3,19,'res/photo1-1564890397308.jpg'),(4,21,'res/photo1-1564891023953.jpg'),(5,22,'res/photo1-1564891074915.jpg'),(6,23,'res/photo1-1564892152734.jpg'),(7,24,'res/photo1-1564895522649.jpg'),(8,25,'res/photo1-1565035672511.jpg'),(9,26,'res/photo1-1565039039635.jpg'),(10,27,'res/photo1-1565044924789.jpg'),(11,28,'res/photo1-1565045869260.png'),(17,34,'res/photo1-1565049715890.jpg'),(18,35,'res/photo1-1565050038771.jpg'),(19,36,'res/photo1-1565050065496.jpg');
 /*!40000 ALTER TABLE `post_picture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -314,7 +312,7 @@ CREATE TABLE `posts` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -323,7 +321,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (19,'random post','2019-08-04 03:46:37','first post',1),(21,'bleh','2019-08-04 03:57:04','meh',3),(22,'heh','2019-08-04 03:57:54','heh',4),(23,'testing for new posts','2019-08-04 04:15:52','wawaw',1),(24,'woah this be workin fam','2019-08-04 05:12:02','hmmmm',1);
+INSERT INTO `posts` VALUES (19,'random post','2019-08-04 03:46:37','first post',1),(21,'bleh','2019-08-04 03:57:04','meh',3),(22,'heh','2019-08-04 03:57:54','heh',4),(23,'testing for new posts','2019-08-04 04:15:52','wawaw',1),(24,'woah this be workin fam','2019-08-04 05:12:02','hmmmm',1),(25,'my 4th post','2019-08-05 20:07:52','lets see if my profile page works',1),(26,'new post ','2019-08-05 21:03:59','just for tests',3),(27,'testing promises','2019-08-05 22:42:04','for async function',4),(28,'debug1','2019-08-05 22:57:49','debugging',3),(34,'adasdsa','2019-08-06 00:01:55','sdadsadsa',4),(35,'dp','2019-08-06 00:07:18','',1),(36,'cp','2019-08-06 00:07:45','',1);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,7 +407,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Ishmam Solaiman','ishmam.a.solaiman@gmail.com','adad','1997-03-13','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(2,'Mayesha Noor','mayesha@gmail.com','bbbb','1996-10-18','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(3,'Samila Sobhan','samila@gmail.com','ssss','1997-10-28','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(4,'Tasnim Islam','tasnim@gmail.com','tttt','1997-10-28','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(5,'Tanzila Maria','tanzila@gmail.com','lala','1997-01-24','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg');
+INSERT INTO `user` VALUES (1,'Ishmam Solaiman','ishmam.a.solaiman@gmail.com','adad','1997-03-13','0','res/photo1-1565050038771.jpg','res/photo1-1565050065496.jpg','res/defaultBg.jpg'),(2,'Mayesha Noor','mayesha@gmail.com','bbbb','1996-10-18','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(3,'Samila Sobhan','samila@gmail.com','ssss','1997-10-28','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg'),(4,'Tasnim Islam','tasnim@gmail.com','tttt','1997-10-28','0','res/photo1-1565049715890.jpg','res/default.jpg','res/defaultBg.jpg'),(5,'Tanzila Maria','tanzila@gmail.com','lala','1997-01-24','0','res/default.jpg','res/default.jpg','res/defaultBg.jpg');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-04 12:08:07
+-- Dump completed on 2019-08-06  7:36:04
