@@ -142,7 +142,7 @@ connection.query('select count(*) as postcount from posts',(err , result, fields
   else{
     numPosts =  result[0].postcount;
     console.log(result[0].postcount);
-    connection.query('select picture from post_picture', (err, result, fields)=>{
+    connection.query('select picture from post_picture order by post_id desc', (err, result, fields)=>{
        if(err) throw err;
        else{
         pictures = result;
