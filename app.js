@@ -132,40 +132,52 @@ app.get("/testpage",(rq,rs)=>{
 });
 
 
-app.get("/home", function(req, res) {
+
+///post loader
+function loadPosts(){
+  return new Promise( ( resolve, reject ) => {
+
+   connection.query('select * from user inner join (select * from post_picture inner join (select * from posts inner join (select friend_id from friends where user_id = ?) as T on posts.user_id = T.friend_id) as T on post_picture.post_id = T.id) as T on user.user_id = T.user_id;',[userID],(err , result, fields)=>{
+                if ( err ) return reject( err );
+                posts  = result;
+                resolve( posts );
+          } );
+      } );
+  }
+app.get("/home", async (req, res)=>{
 
 let numPosts = 0;
-
+let unames ="";
 var pics = [];
-connection.query('select count(*) as postcount from posts',(err , result, fields)=>{
-  if(err) throw err;
-  else{
-    numPosts =  result[0].postcount;
-    console.log(result[0].postcount);
-    connection.query('select picture from post_picture order by post_id desc', (err, result, fields)=>{
-       if(err) throw err;
-       else{
-        pictures = result;
-
-        for(var i in pictures){
-           pics.push([pictures[i].picture]);
-          }
-
+let postInfo = await loadPosts();
+console.log(postInfo);
+// connection.query('select * from posts inner join (select friend_id from friends where user_id = ?) as T on posts.user_id = T.friend_id',[userID],(err , result, fields)=>{
+//   if(err) throw err;
+//   else{
+//     numPosts =  result.length;
+//     connection.query('select picture from post_picture inner join (select * from posts inner join (select friend_id from friends where user_id = ?) as T on posts.user_id = T.friend_id) as T on post_picture.post_id = T.id;',
+//     [userID], (err, result, fields)=>{
+//        if(err) throw err;
+//        else{
+//         pictures = result;
+//         for(var i in pictures){
+//            pics.push(pictures[i].picture);
+//         }
+        if (req.session.loggedin) {
+            res.render("home",{
+              title:"uBlog | Home",
+              posts: postInfo
+            });
         }
-       if (req.session.loggedin) {
-         res.render("home",{
-           title:"uBlog | Home",
-           posts: numPosts,
-           pics: pics
-         });
-       } else {
-         res.send("not logged in");
-       }
-    });
-
-  }
-});
-
+        else {
+        res.send("not logged in");
+      }
+//     }
+//     });
+//
+//   }
+// });
+//
 });
 
 app.get("/newpost",(rq,rs)=>{
@@ -280,8 +292,6 @@ userInfo.posts = result;
 
 app.get("/profile" ,(req , res)=>{
  loadUserInfo().then((userInfo)=>{
-  console.log("in .then statement")  ;
-  console.log(userInfo);
   res.render("profile", {title:"profile | uBlog" ,name:userInfo.name, numposts:userInfo.numposts,followers:userInfo.followers,friends:userInfo.friends, posts:userInfo.posts, dp: userInfo.dp,  bp: userInfo.bp,  cp: userInfo.cp});
 }).catch((err)=>{
   console.log(err);

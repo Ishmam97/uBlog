@@ -18,32 +18,23 @@
 </head>
 
 <body>
-<!-- NAVbAR -->
-  <div class="main-nav">
-  <div class="logo"></div>
-  <div class="searchbar">
-  <input type="text" class="search-text" placeholder="Search">
-  <a href="/search" class="search-btn">
-  <i class="fas fa-search"></i>
-  </a>
-  </div>
-  <div class="nav-list">
-    <ul>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="/messages">Messages</a></li>
-      <li><a href="/logout">Logout</a></li>
-    </ul>
-  </div>
-  </div>
-  <div class="overlay hidden">
 
-  </div>
+  <%- include("partials/navbar") -%>
 <!-- posts loaded dynamically -->
 <div class="page">
- <% for(let i = 0; i<posts ;i++){ %>
-   <div class="box b<%= ((i+1) < 8)? (i+1) : ((i+1)%8)+1 %> ">
-          <img src="<%=pics[i]%>" alt="post" width="100%" height="100%">
-   </div>
+ <% for(let i = 0; i<posts.length ;i++){ %>
+   <div class="post-container">
+        <div class="post-user">
+          <strong><%=posts[i].name%></strong>
+        </div>
+         <div class="post-pic">
+           <img src="<%=posts[i].picture%>" class="post-img" alt="post" height="100%" >
+         </div>
+          <div class="post-buts">
+            <button type="button" name="like">Like</button>
+            <button type="button" name="dislike">Dislike</button>
+          </div>
+ </div>
 <% } %>
 </div>
 <div class="newpost">
