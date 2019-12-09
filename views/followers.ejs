@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%=title%></title>
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/follower.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/662628882d.js"></script>
+
+</head>
+
+<body>
+
+  <%- include("partials/navbar") -%>
+<!-- posts loaded dynamically -->
+<div class="page">
+ <% for(let i = 0; i<followers.length ;i++){ %>
+   <div class="user-container">
+        <div class="user-dp">
+          <img src="<%=followers[i].dp%>" class="post-img" alt="post" height="100%" >
+        </div>
+        <div class="user-name">
+        <a href= "/profile/<%=followers[i].user_id%>" ><strong><%=followers[i].name%></strong></a>
+        </div>
+ </div>
+<% } %>
+</div>
+<div class="newpost">
+<form  action="/newpost" method="get">
+  <input class="postbutton" type="submit" name="newpost" value="+">
+</form>
+
+</div>
+
+<div class="foot"> </div>
+
+
+</body>
+</html>

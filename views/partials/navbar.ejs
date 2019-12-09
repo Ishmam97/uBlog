@@ -1,11 +1,9 @@
 <div class="main-nav">
-<div class="logo"></div>
-<div class="searchbar">
-<input type="text" class="search-text" placeholder="Search">
-<a href="/search" class="search-btn">
-<i class="fas fa-search"></i>
-</a>
-</div>
+<a href="/home"><div class="logo"></div></a>
+<form class="searchbar" action="/search" method="post">
+<input id="searchBox" type="text" class="search-text" placeholder="Search" name="searchName">
+<button type="submit" name="search-btn" class="search-btn"><i class="fas fa-search"></i></button>
+</form>
 <div class="nav-list">
   <ul>
     <li><a href="/profile">Profile</a></li>

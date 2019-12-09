@@ -349,8 +349,73 @@ app.post("/changedCP",(req , res)=>{
     }).then(res.redirect("/profile"));
 });
 
-// app.get(`/followers` , (req , res)=>{
-//   res.send("test");
+
+
+
+// function loadPosts(){
+//   return new Promise( ( resolve, reject ) => {
+//
+//    connection.query('select * from user inner join (select * from post_picture inner join (select * from posts inner join (select friend_id from friends where user_id = ?) as T on posts.user_id = T.friend_id) as T on post_picture.post_id = T.id) as T on user.user_id = T.user_id;',[userID],(err , result, fields)=>{
+//                 if ( err ) return reject( err );
+//                 posts  = result;
+//                 resolve( posts );
+//           } );
+//       } );
+//   }
+
+
+function loadFollowers(){
+  return new Promise( (resolve , reject ) => {
+    let sql = "select * from user inner join (select * from follow where follow.user_id = ?) as T where user.user_id = T.follower_id;";
+    connection.query( sql , [userID] , (err , result , fields)=>{
+      if (err) console.log(err);
+      console.log(result);
+      resolve(result);
+      });
+  });
+}
+
+app.get(`/followers` , async (req , res)=>{
+  let followers = await loadFollowers();
+  res.render("followers" , {title:"followers" , followers : followers});
+});
+
+function loadFriends(){
+  return new Promise( (resolve , reject ) => {
+    let sql = "select * from user inner join (select * from friends where friends.user_id = ?) as T where user.user_id = T.friend_id;";
+    connection.query( sql , [userID] , (err , result , fields)=>{
+      if (err) console.log(err);
+      resolve(result);
+      });
+  });
+}
+app.get(`/friends` , async (req , res)=>{
+  let followers = await loadFriends();
+  res.render("followers" , {title:"friends" , followers : followers});
+});
+
+// app.get('/profile/:username', function(request, response, next) {
+//   var username = request.params.username;
+//   findUserByUsername(username, function(error, user) {
+//     if (error) return next(error);
+//     return response.render('admin', user);
+//   });
+// });
+// function searchUser( uName ){
+//    return new promise((resolve , reject)=>{
+//      let sql = `select * from user where name like '%${uName}%';`
+//      connection.query (sql , (err , result , fields)=>{
+//         if (err) console.log(err);
+//         resolve(result);
+//      });
+//    });
+// }
+
+// app.post("/search" ,async ( req , res ) => {
+//   const un = req.body.searchName;
+//   console.log(un);
+//   let users = await searchUser(un);
+//   res.render("followers", {title : "Search", followers: users});
 // });
 
 // app.get(`/friends` , (req , res)=>{
