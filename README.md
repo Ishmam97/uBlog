@@ -1,9 +1,9 @@
 # uBlog
-Pre Alpha stage\n
-\nscreenshots:
-\nProfile page:
-https://prnt.sc/sd0bij
-\nFeed:
-https://prnt.sc/sd0ddh
-\nLanding: 
-https://prnt.sc/sd0dry
+Pre Alpha stage                                                                   
+screenshots:                                                                                           
+Profile page:                                                                                        
+https://prnt.sc/sd0bij                                                                                                                                                                
+Feed:                                                                                                      
+https://prnt.sc/sd0ddh                                                                                          
+Landing:                                                                                          
+https://prnt.sc/sd0dry                                                                                         
