@@ -1,5 +1,5 @@
 # uBlog
-Pre Alpha stage                                                                   
+                                                              
 screenshots:                                                                                           
 Profile page:                                                                                        
 https://prnt.sc/sd0bij                                                                                                                                                                
